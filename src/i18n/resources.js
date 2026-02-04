@@ -735,71 +735,9 @@ states: [
   "add_product": {
     "title": "Add Product",
     "product_name": "Product Name",
-    "product_name_placeholder": "e.g. Organic Wheat Flour",
-     "description": "Description",
-    "description_placeholder": "Enter product description",
-    "brand": "Brand / Source",
-    "select_source": "Select source",
-    "mrp": "MRP",
-    "mrp_placeholder": "₹ 0.00",
-    "quantity": "Quantity",
-    "unit": "Unit",
-    "select": "Select",
-    "purchase_date": "Purchase Date",
-    "expiry_date": "Expiry Date",
-    "date_placeholder": "mm/dd/yyyy",
-    "save": "Save Product"
-  },
-
-"back": "Back",
-  "back_to_login": "Back to Login",
-
-  "error": "Error",
-  "success": "Success",
-  "info": "Info",
-  "ok": "OK",
-  "fill_required_fields": "Please fill all required fields",
-
-  "first_name": "First Name",
-  "last_name": "Last Name",
-  "email": "Email",
-  "phone_number": "Phone Number",
-  "password": "Password",
-  "enter_first_name": "Enter first name",
-  "enter_last_name": "Enter last name",
-  "enter_email": "Enter email",
-  "enter_phone": "Enter phone number",
-  "enter_password": "Enter password",
-
-  "gender": "Gender",
-  "male": "Male",
-  "female": "Female",
-  "select_gender": "Select gender",
-
-  "state": "State",
-  "district": "District",
-  "village": "Village",
-  "select_state": "Select state",
-  "select_district": "Select district",
-  "select_village": "Select village",
-
-  "gst_number": "GST Number",
-  "enter_gst": "Enter GST number",
-
-  "shop_name": "FPO / Shop Name",
-
-  "register": "Register",
-  "update_profile": "Update Profile",
-  "update_profile_sub": "Update your personal information",
-  "profile_updated": "Profile updated successfully",
-
-  "fpo_registration": "FPO Registration",
-  "fpo_registration_sub": "Create your FPO account",
-
-  "add_product": {
-    "title": "Add Product",
-    "product_name": "Product Name",
     "product_name_placeholder": "Enter product name",
+    "product_image": "Product Image",
+    "select_image": "Select Image",
     "description": "Description",
     "description_placeholder": "Enter product description",
     "brand": "Brand",
@@ -811,82 +749,8 @@ states: [
     "select": "Select",
     "purchase_date": "Purchase Date",
     "expiry_date": "Expiry Date",
-    "date_placeholder": "DD/MM/YYYY",
     "save": "Save"
   },
-
-  "profile": {
-    "edit": "Edit Profile",
-    "account_details": "Account Details",
-    "app_name": "KrishiYan App",
-
-    "account": {
-      "phone": "Phone",
-      "email": "Email",
-      "location": "Location"
-    },
-
-    "features": {
-      "field_crop_mapping": {
-        "title": "Field Crop Mapping",
-        "sub": "Manage your field mapping"
-      },
-      "schemes_subsidies": {
-        "title": "Schemes & Subsidies",
-        "sub": "View available schemes"
-      }
-    },
-
-    "settings": {
-      "notifications": "Notifications",
-      "language": "Language",
-      "privacy": "Privacy Policy",
-      "help": "Help & Support",
-      "logout": "Logout"
-    }
-  },
-
-  "roles": {
-    "fpo": "FPO",
-    "employee": "Employee"
-  },
-
-  "states": [
-    "Maharashtra",
-    "Gujarat",
-    "Madhya Pradesh",
-    "Andhra Pradesh"
-  ],
-
-  "districts": [
-    "Pune",
-    "Nagpur",
-    "Nashik"
-  ],
-
-  "villages": [
-    "Village A",
-    "Village B",
-    "Village C"
-  ],
-
-"purchase": {
-    "title": "Purchase Records",
-    "add": "Add Purchase",
-    "add_title": "Add Purchase Entry",
-    "add_subtitle": "Record new procurement",
-    "farmer": "Select Farmer",
-    "choose_farmer": "Choose farmer",
-    "crop": "Select Crop",
-    "choose_crop": "Choose crop",
-    "rate": "Rate Per Kg (₹)",
-    "quantity": "Quantity (kg)",
-    "date": "Procurement Date",
-    "center": "Procurement Center",
-    "godown": "Godown",
-    "vehicle": "Vehicle",
-    "remarks": "Remarks"
-  }
 
     },
   },
@@ -1620,72 +1484,9 @@ states: [
   "add_product": {
     "title": "उत्पाद जोड़ें",
     "product_name": "उत्पाद का नाम",
-    "product_name_placeholder": "जैसे: ऑर्गेनिक गेहूं का आटा",
-     "description": "विवरण",
-    "description_placeholder": "उत्पाद का विवरण दर्ज करें",
-    "brand": "ब्रांड / स्रोत",
-    "select_source": "स्रोत चुनें",
-    "mrp": "एमआरपी",
-    "mrp_placeholder": "₹ 0.00",
-    "quantity": "मात्रा",
-    "unit": "इकाई",
-    "select": "चुनें",
-    "purchase_date": "खरीद की तारीख",
-    "expiry_date": "समाप्ति तिथि",
-    "date_placeholder": "दिन/माह/वर्ष",
-    "save": "उत्पाद सहेजें"
-  },
-
-
-  "back": "वापस",
-  "back_to_login": "लॉगिन पर वापस जाएँ",
-
-  "error": "त्रुटि",
-  "success": "सफलता",
-  "info": "जानकारी",
-  "ok": "ठीक है",
-  "fill_required_fields": "कृपया सभी आवश्यक जानकारी भरें",
-
-  "first_name": "पहला नाम",
-  "last_name": "अंतिम नाम",
-  "email": "ईमेल",
-  "phone_number": "मोबाइल नंबर",
-  "password": "पासवर्ड",
-  "enter_first_name": "पहला नाम दर्ज करें",
-  "enter_last_name": "अंतिम नाम दर्ज करें",
-  "enter_email": "ईमेल दर्ज करें",
-  "enter_phone": "मोबाइल नंबर दर्ज करें",
-  "enter_password": "पासवर्ड दर्ज करें",
-
-  "gender": "लिंग",
-  "male": "पुरुष",
-  "female": "महिला",
-  "select_gender": "लिंग चुनें",
-
-  "state": "राज्य",
-  "district": "जिला",
-  "village": "गाँव",
-  "select_state": "राज्य चुनें",
-  "select_district": "जिला चुनें",
-  "select_village": "गाँव चुनें",
-
-  "gst_number": "जीएसटी नंबर",
-  "enter_gst": "जीएसटी नंबर दर्ज करें",
-
-  "shop_name": "एफपीओ / दुकान का नाम",
-
-  "register": "रजिस्टर करें",
-  "update_profile": "प्रोफ़ाइल अपडेट करें",
-  "update_profile_sub": "अपनी व्यक्तिगत जानकारी अपडेट करें",
-  "profile_updated": "प्रोफ़ाइल सफलतापूर्वक अपडेट हुई",
-
-  "fpo_registration": "एफपीओ पंजीकरण",
-  "fpo_registration_sub": "अपना एफपीओ खाता बनाएँ",
-
-  "add_product": {
-    "title": "उत्पाद जोड़ें",
-    "product_name": "उत्पाद का नाम",
     "product_name_placeholder": "उत्पाद का नाम दर्ज करें",
+    "product_image": "उत्पाद की तस्वीर",
+    "select_image": "तस्वीर चुनें",
     "description": "विवरण",
     "description_placeholder": "उत्पाद का विवरण दर्ज करें",
     "brand": "ब्रांड",
@@ -1697,82 +1498,8 @@ states: [
     "select": "चुनें",
     "purchase_date": "खरीद तिथि",
     "expiry_date": "समाप्ति तिथि",
-    "date_placeholder": "DD/MM/YYYY",
     "save": "सेव करें"
   },
-
-  "profile": {
-    "edit": "प्रोफ़ाइल संपादित करें",
-    "account_details": "खाता विवरण",
-    "app_name": "कृषियन ऐप",
-
-    "account": {
-      "phone": "मोबाइल",
-      "email": "ईमेल",
-      "location": "स्थान"
-    },
-
-    "features": {
-      "field_crop_mapping": {
-        "title": "खेत फसल मानचित्रण",
-        "sub": "अपने खेत का मानचित्र प्रबंधित करें"
-      },
-      "schemes_subsidies": {
-        "title": "योजनाएँ और सब्सिडी",
-        "sub": "उपलब्ध योजनाएँ देखें"
-      }
-    },
-
-    "settings": {
-      "notifications": "सूचनाएँ",
-      "language": "भाषा",
-      "privacy": "गोपनीयता नीति",
-      "help": "मदद और समर्थन",
-      "logout": "लॉगआउट"
-    }
-  },
-
-  "roles": {
-    "fpo": "एफपीओ",
-    "employee": "कर्मचारी"
-  },
-
-  "states": [
-    "महाराष्ट्र",
-    "गुजरात",
-    "मध्य प्रदेश",
-    "आंध्र प्रदेश"
-  ],
-
-  "districts": [
-    "पुणे",
-    "नागपुर",
-    "नाशिक"
-  ],
-
-  "villages": [
-    "गाँव A",
-    "गाँव B",
-    "गाँव C"
-  ],
-
-  "purchase": {
-    "title": "खरीद रिकॉर्ड",
-    "add": "खरीद जोड़ें",
-    "add_title": "खरीद प्रविष्टि जोड़ें",
-    "add_subtitle": "नई खरीद दर्ज करें",
-    "farmer": "किसान चुनें",
-    "choose_farmer": "किसान चुनें",
-    "crop": "फसल चुनें",
-    "choose_crop": "फसल चुनें",
-    "rate": "प्रति किलो दर (₹)",
-    "quantity": "मात्रा (किलो)",
-    "date": "खरीद तिथि",
-    "center": "खरीद केंद्र",
-    "godown": "गोदाम",
-    "vehicle": "वाहन",
-    "remarks": "टिप्पणी"
-  }
     },
   },
 };

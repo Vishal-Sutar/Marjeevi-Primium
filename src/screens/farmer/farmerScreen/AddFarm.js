@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, Alert, PermissionsAndroid, Platform, Modal } from "react-native";
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from "react-native-maps";
 import Geolocation from "@react-native-community/geolocation";
@@ -58,10 +58,6 @@ const AddFarm = ({ navigation }) => {
   };
 
   const handleMapPress = (e) => {
-    if (markers.length >= 4) {
-      Alert.alert("Limit Reached", "You can only place up to 4 markers");
-      return;
-    }
     setMarkers([...markers, e.nativeEvent.coordinate]);
   };
 
@@ -240,7 +236,7 @@ const AddFarm = ({ navigation }) => {
       </View>
 
       <View style={styles.markerInfo}>
-        <Text style={styles.markerInfoText}>{markers.length}/4 markers placed</Text>
+        <Text style={styles.markerInfoText}>{markers.length} markers placed</Text>
       </View>
 
       <Modal visible={showModal} transparent animationType="fade" onRequestClose={() => setShowModal(false)}>

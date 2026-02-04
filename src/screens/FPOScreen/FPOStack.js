@@ -22,6 +22,7 @@ import Screen4 from '../Signup/Form/Screen4';
 import Screen5 from '../Signup/Form/Screen5';
 import Screen6 from '../Signup/Form/Screen6';
 import Screen7 from '../Signup/Form/Screen7';
+import FpoCommunity from './FpoScreen/FpoCommunity';
 
 const LoadingIndicator = () => (
   <View style={styles.loadingContainer}>
@@ -41,6 +42,7 @@ export const UserStackHome = () => {
       }}>
     
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="FpoCommunity" component={FpoCommunity}/>
             <Stack.Screen name="Ledger" component={Ledger} />
             <Stack.Screen name="Performance" component={Performance} />
             <Stack.Screen name="OrderDetails" component={OrderDetails} />

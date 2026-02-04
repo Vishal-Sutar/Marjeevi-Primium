@@ -12,6 +12,7 @@ import ListingDetails from '../TabScreen/ListingDetails';
 import AddPurchaseEntry from '../TabScreen/AddPurchaseEntry ';
 import EditProfile from '../TabScreen/EditProfile';
 import StaffCreateListing from '../TabScreen/StaffCreateListing';
+import StaffCommunity from '../TabScreen/StaffCommunity';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ export const UserStackHome = () => (
       <Stack.Screen name="Listing" component={Listing} />
       <Stack.Screen name="ListingDetails" component={ListingDetails} />
       <Stack.Screen name="StaffCreateListing" component={StaffCreateListing} />
+      <Stack.Screen name="StaffCommunity" component={StaffCommunity} />
     </Stack.Navigator>
   </Suspense>
 );

@@ -8,12 +8,14 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  Image,
 } from "react-native";
 import DatePicker from "react-native-date-picker";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { launchImageLibrary } from "react-native-image-picker";
 import apiService from "../../../Redux/apiService";
 
 const UNITS = [
@@ -22,15 +24,18 @@ const UNITS = [
   { id: "3", label: "Box", value: "box" },
   { id: "4", label: "Bottle", value: "bottle" },
   { id: "5", label: "Can", value: "can" },
+  { id: "6", label: "ML", value: "ml" },
+
 ];
 
 
 const AddProduct = () => {
   const { t } = useTranslation();
-const navigation = useNavigation();
-const [showUnit, setShowUnit] = useState(false);
-const [openPurchase, setOpenPurchase] = useState(false);
-const [openExpiry, setOpenExpiry] = useState(false);
+  const navigation = useNavigation();
+  const [showUnit, setShowUnit] = useState(false);
+  const [openPurchase, setOpenPurchase] = useState(false);
+  const [openExpiry, setOpenExpiry] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [form, setForm] = useState({
     productName: "",
     brand: "",
@@ -40,10 +45,30 @@ const [openExpiry, setOpenExpiry] = useState(false);
     purchaseDate: "",
     expiryDate: "",
     description:"",
+    productImage: "",
   });
 
   const handleChange = (key, value) => {
     setForm(prev => ({ ...prev, [key]: value }));
+  };
+
+  const pickImage = () => {
+    launchImageLibrary(
+      {
+        mediaType: "photo",
+        quality: 0.7,
+        maxWidth: 800,
+        maxHeight: 800,
+        includeBase64: true,
+      },
+      (response) => {
+        if (response.didCancel || response.errorCode) return;
+        
+        const asset = response.assets[0];
+        setSelectedImage(asset);
+        handleChange("productImage", `data:${asset.type};base64,${asset.base64}`);
+      }
+    );
   };
 
   const handleSave  = async() => {
@@ -97,6 +122,25 @@ try {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scroll}
       >
+        {/* PRODUCT IMAGE */}
+        <Text style={styles.label}>
+          {t("add_product.product_image")}
+        </Text>
+        <TouchableOpacity
+          style={styles.imagePickerBtn}
+          onPress={pickImage}
+          activeOpacity={0.8}
+        >
+          {selectedImage ? (
+            <Image source={{ uri: selectedImage.uri }} style={styles.selectedImage} />
+          ) : (
+            <View style={styles.imagePlaceholder}>
+              <Icon name="camera-outline" size={24} color="#6B7280" />
+              <Text style={styles.imageText}>{t("add_product.select_image")}</Text>
+            </View>
+          )}
+        </TouchableOpacity>
+
         {/* PRODUCT NAME */}
         <Text style={styles.label}>
           {t("add_product.product_name")} *
@@ -450,6 +494,35 @@ optionText: {
   color: "#111827",
 },
 
+/* IMAGE PICKER */
+imagePickerBtn: {
+  height: 120,
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: "#E5E7EB",
+  marginBottom: 16,
+  backgroundColor: "#ffffff",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
+},
+
+imagePlaceholder: {
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 8,
+},
+
+imageText: {
+  fontSize: 14,
+  color: "#6B7280",
+},
+
+selectedImage: {
+  width: "100%",
+  height: "100%",
+  resizeMode: "cover",
+},
 
 });
 

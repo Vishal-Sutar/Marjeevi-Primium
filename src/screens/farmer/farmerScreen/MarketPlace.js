@@ -89,28 +89,40 @@ const MarketPlace = () => {
     }
   };
 
- const renderItem = ({ item }) => (
-    <View style={styles.card}>
-      <View style={styles.imageBox}>
-        <Icon name="grass" size={28} color="#3A9D4F" />
+ const renderItem = ({ item }) => {
+    const imageUrl = item.productImage?.url;
+    
+    return (
+      <View style={styles.card}>
+        <View style={styles.imageBox}>
+          {imageUrl ? (
+            <Image 
+              source={{ uri: imageUrl }} 
+              style={styles.productImage}
+              onError={() => console.log('Image load error for:', item.itemName)}
+            />
+          ) : (
+            <Icon name="grass" size={28} color="#3A9D4F" />
+          )}
+        </View>
+
+        <Text style={styles.productName}>{item.itemName || 'N/A'}</Text>
+        <Text style={styles.brand}>{item.brand || 'N/A'}</Text>
+
+        <Text style={styles.price}>
+          ₹{item.price || 0}
+        </Text>
+
+        <TouchableOpacity 
+          style={styles.cartBtn}
+          onPress={() => handleAddToCart(item)}
+        >
+          <Icon name="shopping-cart" size={14} color="#fff" style={styles.cartBtnIcon} />
+          <Text style={styles.cartBtnText}>Add to Cart</Text>
+        </TouchableOpacity>
       </View>
-
-      <Text style={styles.productName}>{item.itemName || 'N/A'}</Text>
-      <Text style={styles.brand}>{item.brand || 'N/A'}</Text>
-
-      <Text style={styles.price}>
-        ₹{item.price || 0}
-      </Text>
-
-      <TouchableOpacity 
-        style={styles.cartBtn}
-        onPress={() => handleAddToCart(item)}
-      >
-        <Icon name="shopping-cart" size={14} color="#fff" style={styles.cartBtnIcon} />
-        <Text style={styles.cartBtnText}>Add to Cart</Text>
-      </TouchableOpacity>
-    </View>
-  );
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -361,6 +373,12 @@ categoryTextActive: {
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 8,
+    overflow: "hidden",
+  },
+  productImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
   productName: {
     fontSize: 13,

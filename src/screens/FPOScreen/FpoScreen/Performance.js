@@ -8,6 +8,7 @@ import {
   FlatList,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -49,63 +50,69 @@ useFocusEffect(
 
 
 
-const renderItem = useCallback(({ item }) => (
-  <View style={styles.card}>
-    <View style={styles.iconBox}>
-      <Text style={styles.icon}>📦</Text>
-    </View>
+const renderItem = useCallback(({ item }) => {
+  // Handle productImage if it's an object with url property
+  const imageUri = typeof item?.productImage === 'object' && item?.productImage?.url 
+    ? item.productImage.url 
+    : typeof item?.productImage === 'string' 
+    ? item.productImage 
+    : null;
 
-    <View style={styles.details}>
-      <Text style={styles.name}>{item?.productName}</Text>
+  return (
+    <View style={styles.card}>
+      <View style={styles.iconBox}>
+        {imageUri ? (
+          <Image 
+            source={{ uri: imageUri }} 
+            style={styles.productImage}
+            onError={() => console.log('Image load error')}
+          />
+        ) : (
+          <Text style={styles.icon}>📦</Text>
+        )}
+      </View>
 
-      <Text style={styles.brand}>
-        {t("inventory.brand")}: {item?.brand}
-      </Text>
+      <View style={styles.details}>
+        <Text style={styles.name}>{item?.productName}</Text>
 
-      <Text style={styles.mrp}>
-        {t("inventory.mrp")} {item?.mrp}
-      </Text>
-      <Text style={styles.mrp}>
-        {t("Description: ")} {item?.description}
-      </Text>
+        <Text style={styles.brand}>
+          {t("inventory.brand")}: {item?.brand}
+        </Text>
 
-      <View style={styles.stockRow}>
-        <View
-          style={[
-            styles.stockBadge,
-            item.status === "in"
-              ? styles.inStock
-              : styles.lowStock,
-          ]}
-        >
-          <Text
+        <Text style={styles.mrp}>
+          {t("inventory.mrp")} {item?.mrp}
+        </Text>
+        <Text style={styles.mrp}>
+          {t("Description: ")} {item?.description}
+        </Text>
+
+        <View style={styles.stockRow}>
+          <View
             style={[
-              styles.stockText,
+              styles.stockBadge,
               item.status === "in"
-                ? styles.inStockText
-                : styles.lowStockText,
+                ? styles.inStock
+                : styles.lowStock,
             ]}
           >
-            {t(`inventory.status.${item?.quantity}`)}
-          </Text>
-        </View>
+            <Text
+              style={[
+                styles.stockText,
+                item.status === "in"
+                  ? styles.inStockText
+                  : styles.lowStockText,
+              ]}
+            >
+              {t(`inventory.status.${item?.quantity}`)}
+            </Text>
+          </View>
 
-        <Text style={styles.stockQty}>{item?.quantity}</Text>
+          <Text style={styles.stockQty}>{item?.quantity}</Text>
+        </View>
       </View>
     </View>
-
-    {/* <TouchableOpacity
-      style={styles.updateBtn}
-      onPress={() =>
-        navigation.navigate("UpdateProduct", { id: item.id })
-      }
-    >
-      <Text style={styles.updateText}>
-        {t("inventory.update")}
-      </Text>
-    </TouchableOpacity> */}
-  </View>
-), [navigation, t]);
+  );
+}, [t]);
 
 
   return (
@@ -134,7 +141,7 @@ const renderItem = useCallback(({ item }) => (
           {/* INVENTORY LIST */}
           <FlatList
             data={products}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item, index) => item.id || index.toString()}
             renderItem={renderItem}
             scrollEnabled={false}
           />
@@ -206,9 +213,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginRight: 10,
+    overflow: "hidden",
   },
   icon: {
     fontSize: 18,
+  },
+  productImage: {
+    width: 40,
+    height: 40,
+    resizeMode: "cover",
   },
 
   details: {

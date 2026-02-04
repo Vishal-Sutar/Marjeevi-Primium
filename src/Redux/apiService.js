@@ -65,28 +65,7 @@ const getUserId = async () => {
 
 /* ================= API SERVICES ================= */
 const apiService = {
-  /* ---------- PROFILE ---------- */
-  // getProfileDetails: async () => {
-  //   try {
-  //     console.log('🔍 Getting profile from:', apiClient.defaults.baseURL + '/api/user/getUserDetails');
-      
-  //     const response = await apiClient.get("/api/user/getUserDetails");
-  //     console.log('✅ Profile response:', response);
-  //           console.log("hhifefih");
-
-  //     return response?.data?.data;
-  //   } catch (error) {
-  //     console.error("Get profile error:", error.message);
-  //     console.error("Profile URL:", apiClient.defaults.baseURL + '/api/user/getUserDetails');
-  //     throw error;
-  //   }
-  // },
-
-
-
-
-  // adjust path
-
+ 
   getProfileDetails: async () => {
     try {
       console.log("fsdbafbdsab")
@@ -122,63 +101,6 @@ const apiService = {
     }
   },
 
-
-
-
-
-
-
-  // UpdateProfileData: async (data) => {
-  //   try {
-  //     const response = await axios.put("https://marjeevi-fpo.krishigyanai.com/api/user/update-profile", data, {
-  //       headers:{
-  //         Authorization: `Bearer ${await getAccessToken()}`,
-  //       }
-  //     });
-  //     return response?.data?.data;
-  //   } catch (error) {
-  //     console.log("Update profile error:", error);
-  //     throw error;
-  //   }
-  // },
-
-  // UpdateProfileData: async (data) => {
-  //   try {
-  //     const token = await getAccessToken();
-
-  //     const response = await fetch(
-  //       "https://marjeevi-fpo.krishigyanai.com/api/user/update-profile",
-  //       {
-  //         method: "PUT",
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         body: data,
-  //       }
-  //     );
-
-  //     const result = await response.json();
-
-  //     if (!response.ok) {
-  //       console.log("Server error response:", result);
-  //       throw new Error(
-  //         result?.message || `HTTP error! status: ${response.status}`
-  //       );
-  //     }
-
-  //     return result?.data;
-  //   } catch (error) {
-  //     console.log("Update profile error:", error);
-  //     if (error.message === "Network request failed") {
-  //       console.log(
-  //         "Network issue - check internet connection or server availability"
-  //       );
-  //     }
-  //     throw error;
-  //   }
-  // },
-  
-  
   
   UpdateProfileData: async (data) => {
     try {

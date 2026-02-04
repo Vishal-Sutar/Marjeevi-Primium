@@ -22,41 +22,6 @@ const STATS = [
   { id: "3", key: "pending_payments", value: "12", icon: "cash-outline" },
 ];
 
-// const RECENT_PROCUREMENTS = [
-//   {
-//     id: "1",
-//     farmer: "Ramesh Kumar",
-//     code: "PR001",
-//     crop: "Wheat",
-//     quantity: "450 kg",
-//     amount: "₹12,500",
-//     date: "24 Dec 2025",
-//     status: "Completed",
-//   },
-//   {
-//     id: "2",
-//     farmer: "Ramesh Kumar",
-//     code: "PR001",
-//     crop: "Wheat",
-//     quantity: "450 kg",
-//     amount: "₹12,500",
-//     date: "24 Dec 2025",
-//     status: "Completed",
-//   },
-//   {
-//     id: "3",
-//     farmer: "Ramesh Kumar",
-//     code: "PR001",
-//     crop: "Wheat",
-//     quantity: "450 kg",
-//     amount: "₹12,500",
-//     date: "24 Dec 2025",
-//     status: "Completed",
-//   },
-// ];
-
-/* ---------------- SCREEN ---------------- */
-
 const Home = () => {
   const navigation = useNavigation()
     const { t } = useTranslation(); // 🌍
@@ -86,44 +51,44 @@ const mapPurchaseForUI = (item) => ({
 
 
 useEffect(() => {
+  const fetchHomeData = async () => {
+    try {
+      const response = await apiService.GetStaffPurches();
+      console.log("HOME PURCHASE DATA 👉", response);
+
+      const mapped = response.map(mapPurchaseForUI);
+
+      // same card UI, just backend data
+      setProcurements(mapped.slice(0, 3));
+
+      // same stats UI
+      setStats([
+        {
+          id: "1",
+          key: "today_procurements",
+          value: response.length.toString(),
+          icon: "document-text-outline",
+        },
+        {
+          id: "2",
+          key: "pending_quality",
+          value: "0",
+          icon: "time-outline",
+        },
+        {
+          id: "3",
+          key: "pending_payments",
+          value: "0",
+          icon: "cash-outline",
+        },
+      ]);
+    } catch (error) {
+      console.log("HOME API ERROR 👉", error);
+    }
+  };
+
   fetchHomeData();
 }, []);
-
-const fetchHomeData = async () => {
-  try {
-    const response = await apiService.GetStaffPurches();
-    console.log("HOME PURCHASE DATA 👉", response);
-
-    const mapped = response.map(mapPurchaseForUI);
-
-    // same card UI, just backend data
-    setProcurements(mapped.slice(0, 3));
-
-    // same stats UI
-    setStats([
-      {
-        id: "1",
-        key: "today_procurements",
-        value: response.length.toString(),
-        icon: "document-text-outline",
-      },
-      {
-        id: "2",
-        key: "pending_quality",
-        value: "0",
-        icon: "time-outline",
-      },
-      {
-        id: "3",
-        key: "pending_payments",
-        value: "0",
-        icon: "cash-outline",
-      },
-    ]);
-  } catch (error) {
-    console.log("HOME API ERROR 👉", error);
-  }
-};
 
 
   /* ---------------- RENDERERS ---------------- */
@@ -203,6 +168,25 @@ const fetchHomeData = async () => {
               onPress={() => navigation.navigate('StaffCreateListing')}
             >
               <Text style={styles.actionText}>Create Listing</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* FARMERS & COMMUNITY */}
+          <View style={styles.buttonRow}>
+            <TouchableOpacity
+              style={[styles.actionBtn, { flex: 1, marginRight: 8 }]}
+              activeOpacity={0.85}
+              onPress={() => navigation.navigate('Farmers')}
+            >
+              <Text style={styles.actionText}>Farmers</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+              style={[styles.actionBtn, { flex: 1, marginLeft: 8 }]}
+              activeOpacity={0.85}
+              onPress={() => navigation.navigate('StaffCommunity')}
+            >
+              <Text style={styles.actionText}>Community</Text>
             </TouchableOpacity>
           </View>
 

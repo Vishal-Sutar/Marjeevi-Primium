@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -25,7 +25,7 @@ const ACTIONS = [
   { id: "1", key: "add_farmer", icon: "person-add", bg: "#2563EB" },
   { id: "2", key: "order_details", icon: "receipt", bg: "#16A34A" },
   { id: "3", key: "farmer_listing", icon: "list", bg: "#9333EA" },
-  { id: "4", key: "ledger", icon: "document-text", bg: "#F97316" },
+  { id: "4", key: "Community", icon: "people-outline", bg: "#F97316" },
 ];
 
 
@@ -59,8 +59,8 @@ const Home = () => {
       case "farmer_listing":
         navigation.navigate("FarmerListing");
         break;
-      case "ledger":
-        navigation.navigate("Ledger");
+      case "Community":
+        navigation.navigate("FpoCommunity");
         break;
     }
   }, [navigation]);

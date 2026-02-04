@@ -22,6 +22,7 @@ const QUICK_ACTIONS = [
   { id: "6", key: "my_crop", icon: "leaf-outline" },
   { id: "7", key: "crop_doctor", icon: "medical-outline" },
   { id: "8", key: "chatbot", icon: "chatbubble-ellipses-outline" },
+  { id: "9", key: "community", icon: "people-outline" },
 ];
 
 
@@ -39,6 +40,7 @@ const renderAction = ({ item }) => {
       if (item.key === "farmer_tabs.marketplace") navigation.navigate("FarmerMarketTab");
       if (item.key === "crop_doctor") navigation.navigate("CropDoctor");
       if (item.key === "chatbot") navigation.navigate("ChatBot");
+      if (item.key === "community") navigation.navigate("Community");
     };
 
     const getActionText = (key) => {

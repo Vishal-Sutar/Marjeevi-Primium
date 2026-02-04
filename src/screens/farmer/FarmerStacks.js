@@ -27,6 +27,7 @@ import CropDetails from './farmerScreen/CropDetails';
 import EditCrop from './farmerScreen/EditCrop';
 import EditListing from './farmerScreen/EditListing';
 import DiagonsisHistory from './farmerScreen/DiagnosisHistory';
+import Community from './farmerScreen/Community';
 const Stack = createNativeStackNavigator();
 
 // ✅ define color (or import if you already have it)
@@ -63,6 +64,7 @@ export const FarmerStackHome = () => {
         <Stack.Screen name="ScreenSixth" component={ScreenSixth} />
         <Stack.Screen name="ScreenSeventh" component={ScreenSeventh} />
         <Stack.Screen name="DiagonsisHistory" component={DiagonsisHistory} />
+        <Stack.Screen name="Community" component={Community} />
       </Stack.Navigator>
     </Suspense>
   );

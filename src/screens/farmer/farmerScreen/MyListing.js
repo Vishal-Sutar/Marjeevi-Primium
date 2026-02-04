@@ -9,11 +9,11 @@ import {
   ActivityIndicator,
   Image,
   Platform,
+  Alert,
 } from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import AwesomeAlert from 'react-native-awesome-alerts';
 import apiService from "../../../Redux/apiService";
 
 const MyListing = () => {
@@ -21,8 +21,6 @@ const MyListing = () => {
   const { t } = useTranslation();
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertConfig, setAlertConfig] = useState({});
 
   useEffect(() => {
     fetchListings();
@@ -40,63 +38,37 @@ const MyListing = () => {
       setListings(response.data || []);
     } catch (error) {
       console.error("Failed to fetch listings:", error);
-      setAlertConfig({
-        title: "Error",
-        message: "Failed to load your listings. Please try again.",
-        showCancelButton: false,
-        showConfirmButton: true,
-        confirmText: "OK",
-        confirmButtonColor: "#3A9D4F",
-        onConfirmPressed: () => setShowAlert(false)
-      });
-      setShowAlert(true);
+      Alert.alert("Error", "Failed to load your listings. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
-    setAlertConfig({
-      title: "Delete Listing",
-      message: "Are you sure you want to delete this listing?",
-      showCancelButton: true,
-      showConfirmButton: true,
-      cancelText: "Cancel",
-      confirmText: "Delete",
-      confirmButtonColor: "#D32F2F",
-      cancelButtonColor: "#666",
-      onCancelPressed: () => setShowAlert(false),
-      onConfirmPressed: async () => {
-        setShowAlert(false);
-        try {
-          await apiService.deleteCropListing(id);
-          setListings((prev) => prev.filter((item) => item._id !== id));
-          setAlertConfig({
-            title: "Success",
-            message: "Listing deleted successfully",
-            showCancelButton: false,
-            showConfirmButton: true,
-            confirmText: "OK",
-            confirmButtonColor: "#3A9D4F",
-            onConfirmPressed: () => setShowAlert(false)
-          });
-          setShowAlert(true);
-        } catch (error) {
-          console.error("Failed to delete listing:", error);
-          setAlertConfig({
-            title: "Error",
-            message: "Failed to delete listing. Please try again.",
-            showCancelButton: false,
-            showConfirmButton: true,
-            confirmText: "OK",
-            confirmButtonColor: "#3A9D4F",
-            onConfirmPressed: () => setShowAlert(false)
-          });
-          setShowAlert(true);
+    Alert.alert(
+      "Delete Listing",
+      "Are you sure you want to delete this listing?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await apiService.deleteCropListing(id);
+              setListings((prev) => prev.filter((item) => item._id !== id));
+              Alert.alert("Success", "Listing deleted successfully");
+            } catch (error) {
+              console.error("Failed to delete listing:", error);
+              Alert.alert("Error", "Failed to delete listing. Please try again.");
+            }
+          }
         }
-      }
-    });
-    setShowAlert(true);
+      ]
+    );
   };
 
   // ✅ FIXED: Image upload function for CreateListing navigation
@@ -201,25 +173,6 @@ const MyListing = () => {
           removeClippedSubviews={true} // ✅ Performance
         />
       )}
-      
-      <AwesomeAlert
-        show={showAlert}
-        showProgress={false}
-        title={alertConfig.title}
-        message={alertConfig.message}
-        closeOnTouchOutside={false}
-        closeOnHardwareBackPress={false}
-        showCancelButton={alertConfig.showCancelButton}
-        showConfirmButton={alertConfig.showConfirmButton}
-        cancelText={alertConfig.cancelText}
-        confirmText={alertConfig.confirmText}
-        confirmButtonColor={alertConfig.confirmButtonColor}
-        cancelButtonColor={alertConfig.cancelButtonColor}
-        onCancelPressed={alertConfig.onCancelPressed}
-        onConfirmPressed={alertConfig.onConfirmPressed}
-        titleStyle={styles.alertTitle}
-        messageStyle={styles.alertMessage}
-      />
     </View>
   );
 };

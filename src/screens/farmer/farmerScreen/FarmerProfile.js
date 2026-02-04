@@ -221,10 +221,6 @@ const FarmerProfile = () => {
               </View>
             </View>
           </View>
-
-          <TouchableOpacity style={styles.editBtn}>
-            <Text style={styles.editText}>{t("edit")}</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.listWrapper}>
