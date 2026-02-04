@@ -1,6 +1,6 @@
 
 import React, { useState, useCallback } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator, Alert, Image } from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import apiService from "../../../Redux/apiService";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -124,43 +124,55 @@ const Cart = () => {
     }
   };
 
-  const renderItem = ({ item }) => (
-    <View style={styles.card}>
-      <View style={styles.imageBox}>
-        <Icon name="grass" size={28} color="#3A9D4F" />
-      </View>
+  const renderItem = ({ item }) => {
+    const imageUrl = item.item?.itemImage?.url || item.item?.itemImage;
+    
+    return (
+      <View style={styles.card}>
+        <View style={styles.imageBox}>
+          {imageUrl ? (
+            <Image 
+              source={{ uri: imageUrl }} 
+              style={styles.productImage}
+              onError={() => console.log('Image load error for:', item.item?.itemName)}
+            />
+          ) : (
+            <Icon name="grass" size={28} color="#3A9D4F" />
+          )}
+        </View>
 
-      <View style={styles.info}>
-        <Text style={styles.name} numberOfLines={2}>
-          {item.item?.itemName || 'Unknown Item'}
-        </Text>
-        <Text style={styles.brand} numberOfLines={1}>
-          {item.item?.brand || 'No Brand'}
-        </Text>
-        <Text style={styles.price}>₹{item.expectedPrice?.toFixed(2) || '0.00'}</Text>
-      </View>
+        <View style={styles.info}>
+          <Text style={styles.name} numberOfLines={2}>
+            {item.item?.itemName || 'Unknown Item'}
+          </Text>
+          <Text style={styles.brand} numberOfLines={1}>
+            {item.item?.brand || 'No Brand'}
+          </Text>
+          <Text style={styles.price}>₹{item.expectedPrice?.toFixed(2) || '0.00'}</Text>
+        </View>
 
-      <View style={styles.actions}>
-        <View style={styles.qtyBox}>
-          <TouchableOpacity 
-            onPress={() => handleQuantityChange(item._id, -1)}
-          >
-            <Icon name="remove" size={18} color="#666" />
-          </TouchableOpacity>
-          <Text style={styles.qty}>{item.quantity}</Text>
-          <TouchableOpacity 
-            onPress={() => handleQuantityChange(item._id, 1)}
-            disabled={item.quantity >= 8}
-          >
-            <Icon name="add" size={18} color={item.quantity >= 8 ? "#ccc" : "#666"} />
+        <View style={styles.actions}>
+          <View style={styles.qtyBox}>
+            <TouchableOpacity 
+              onPress={() => handleQuantityChange(item._id, -1)}
+            >
+              <Icon name="remove" size={18} color="#666" />
+            </TouchableOpacity>
+            <Text style={styles.qty}>{item.quantity}</Text>
+            <TouchableOpacity 
+              onPress={() => handleQuantityChange(item._id, 1)}
+              disabled={item.quantity >= 8}
+            >
+              <Icon name="add" size={18} color={item.quantity >= 8 ? "#ccc" : "#666"} />
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity onPress={() => handleRemove(item._id)}>
+            <Icon name="delete" size={20} color="#D32F2F" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => handleRemove(item._id)}>
-          <Icon name="delete" size={20} color="#D32F2F" />
-        </TouchableOpacity>
       </View>
-    </View>
-  );
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -296,6 +308,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
     gap: 8,
+  },
+  productImage: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 12,
   },
   qty: {
     fontSize: 14,

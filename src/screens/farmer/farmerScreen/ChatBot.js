@@ -448,7 +448,7 @@ export default function ChatBox() {
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#2f6f73" />
+        <ActivityIndicator size="large" color="#3A9D4F" />
         <Text style={styles.loadingText}>Loading chat...</Text>
       </View>
     );
@@ -484,7 +484,7 @@ export default function ChatBox() {
             {/* Bot Typing Indicator */}
             {botTyping && (
               <View style={styles.typingIndicator}>
-                <ActivityIndicator size="small" color="#2f6f73" style={styles.typingSpinner} />
+                <ActivityIndicator size="small" color="#3A9D4F" style={styles.typingSpinner} />
                 <Text style={styles.typingText}>Bot is typing...</Text>
               </View>
             )}
@@ -626,7 +626,7 @@ const styles = StyleSheet.create({
     }),
   },
   userMsg: {
-    backgroundColor: '#2f6f73',
+    backgroundColor: '#3A9D4F',
     alignSelf: 'flex-end',
     borderBottomRightRadius: 4,
   },
@@ -760,7 +760,7 @@ const styles = StyleSheet.create({
     color: '#1a1a1a',
   },
   sendButton: {
-    backgroundColor: '#2f6f73',
+    backgroundColor: '#3A9D4F',
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 24,
