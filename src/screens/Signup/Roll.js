@@ -22,7 +22,7 @@ const Roll = () => {
       id: "farmer",
       name: t("role_farmer"),
       desc: t("role_farmer_desc"),
-      icon: "👨🌾",
+      icon: "👨‍🌾",
       bgColor: "#16A34A",
     },
     {

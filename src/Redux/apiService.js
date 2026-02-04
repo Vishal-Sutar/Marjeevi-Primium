@@ -212,6 +212,23 @@ const apiService = {
     return res.data;
   },
 
+ updateProduct: async (id, payload) => {
+  
+    const res = await apiClient.put(`/api/product/updateProduct/${id}`, payload);
+    return res.data;
+  
+},
+
+  deleteProduct: async (id) => {
+    try {
+      const res = await apiClient.delete(`/api/product/deleteProduct/${id}`);
+      return res.data;
+    } catch (error) {
+      console.error('❌ deleteProduct error:', error.message);
+      throw error;
+    }
+  },
+
   GetFPOProduct: async () => {
     const res = await apiClient.get("/api/product/getProducts");
     return res?.data?.data;

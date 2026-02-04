@@ -10,6 +10,7 @@ import Ledger from './FpoScreen/Ledger';
 import FieldCropMapping from './FpoScreen/FieldCropMapping';
 import SchemesSubsidies from './FpoScreen/SchemesSubsidies';
 import AddProduct from "./FpoScreen/AddProduct";
+import UpdateProduct from "./FpoScreen/UpdateProduct";
 import UpdateProfile from './FpoScreen/UpdateProfile';
 import Stock from "./FpoScreen/Stock";
 import OrderDetails from './FpoScreen/OrderDetails';
@@ -96,6 +97,7 @@ export const UserStackPerformance = () => {
     
             <Stack.Screen name="Performance" component={Performance} />
             <Stack.Screen name="AddProduct" component={AddProduct} />
+            <Stack.Screen name="UpdateProduct" component={UpdateProduct} />
           
             {/* <Stack.Screen name="PropertyListDetail" component={PropertyListDetail} /> */}
      

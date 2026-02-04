@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Alert,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/Ionicons";
 import apiService from "../../../Redux/apiService";
 /* ---------------- DUMMY DATA (API READY) ---------------- */
 
@@ -40,6 +42,34 @@ const [products, setProducts] = useState([]);
     console.log("API ERROR 👉", error);
   }
 };
+
+  const handleDelete = useCallback((productId) => {
+    Alert.alert(
+      "Delete Product",
+      "Are you sure you want to delete this product?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await apiService.deleteProduct(productId);
+              ProductData();
+              Alert.alert("Success", "Product deleted successfully");
+            } catch (error) {
+              console.log("Delete error:", error);
+              Alert.alert("Error", "Failed to delete product");
+            }
+          },
+        },
+      ]
+    );
+  }, []);
+
+  const handleEdit = useCallback((product) => {
+    navigation.navigate("UpdateProduct", { product });
+  }, [navigation]);
 
 useFocusEffect(
   useCallback(() => {
@@ -106,13 +136,29 @@ const renderItem = useCallback(({ item }) => {
               {t(`inventory.status.${item?.quantity}`)}
             </Text>
           </View>
-
           <Text style={styles.stockQty}>{item?.quantity}</Text>
         </View>
       </View>
+
+      <View style={styles.actions}>
+        <TouchableOpacity
+          style={styles.editBtn}
+          onPress={() => handleEdit(item)}
+          activeOpacity={0.7}
+        >
+          <Icon name="create-outline" size={16} color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.deleteBtn}
+          onPress={() => handleDelete(item._id)}
+          activeOpacity={0.7}
+        >
+          <Icon name="trash-outline" size={16} color="#fff" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
-}, [t]);
+}, [t, handleEdit, handleDelete]);
 
 
   return (
@@ -273,15 +319,20 @@ const styles = StyleSheet.create({
     color: "#374151",
   },
 
-  updateBtn: {
-    backgroundColor: "#0D9488",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 10,
+  actions: {
+    flexDirection: "row",
+    gap: 8,
   },
-  updateText: {
-    color: "#fff",
-    fontSize: 11,
-    fontWeight: "600",
+  editBtn: {
+    backgroundColor: "#3A9D4F",
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderRadius: 8,
+  },
+  deleteBtn: {
+    backgroundColor: "#DC2626",
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderRadius: 8,
   },
 });
