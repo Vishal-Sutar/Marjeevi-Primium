@@ -229,6 +229,16 @@ const apiService = {
     }
   },
 
+  toggleProductStatus: async (id) => {
+    try {
+      const res = await apiClient.put(`/api/product/toggleProductStatus/${id}`);
+      return res.data;
+    } catch (error) {
+      console.error('❌ toggleProductStatus error:', error.message);
+      throw error;
+    }
+  },
+
   GetFPOProduct: async () => {
     const res = await apiClient.get("/api/product/getProducts");
     return res?.data?.data;

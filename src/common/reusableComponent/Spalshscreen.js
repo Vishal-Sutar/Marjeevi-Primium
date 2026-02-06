@@ -78,7 +78,7 @@ const Splashscreen = () => {
       >
         <Text style={styles.welcome}>WELCOME!</Text>
         <Text style={styles.toText}>To</Text>
-        <Text style={styles.title}>Marjeevi Pragatisheel FPO</Text>
+        <Text style={styles.title}>Kissan Parivar</Text>
       </Animated.View>
 
       {/* ANIMATED LOADING TEXT */}

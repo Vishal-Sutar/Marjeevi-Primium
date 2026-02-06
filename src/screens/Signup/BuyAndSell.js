@@ -51,7 +51,7 @@ const BuyAndSell = () => {
           transform: [{ translateY: slideAnim }],
         }}
       >
-        <Text style={styles.appName}>Marjeevi Pragatisheel FPO</Text>
+        <Text style={styles.appName}>Kissan Parivar</Text>
         <Text style={styles.subTitle}>{t("buy_sell_subtitle")}</Text>
       </Animated.View>
 
@@ -99,7 +99,7 @@ const BuyAndSell = () => {
 
       {/* ANIMATED SKIP BUTTON */}
       <Animated.View style={{ opacity: fadeAnim }}>
-        <TouchableOpacity style={styles.skipButton} onPress={() => handleNext()}>
+        <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate('Roll')}>
           <Text style={styles.skipText}>{t("skip")}</Text>
         </TouchableOpacity>
       </Animated.View>

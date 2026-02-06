@@ -43,28 +43,14 @@ const [products, setProducts] = useState([]);
   }
 };
 
-  const handleDelete = useCallback((productId) => {
-    Alert.alert(
-      "Delete Product",
-      "Are you sure you want to delete this product?",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: async () => {
-            try {
-              await apiService.deleteProduct(productId);
-              ProductData();
-              Alert.alert("Success", "Product deleted successfully");
-            } catch (error) {
-              console.log("Delete error:", error);
-              Alert.alert("Error", "Failed to delete product");
-            }
-          },
-        },
-      ]
-    );
+  const handleToggleStatus = useCallback(async (productId, currentStatus) => {
+    try {
+      await apiService.toggleProductStatus(productId);
+      ProductData();
+    } catch (error) {
+      console.log("Toggle status error:", error);
+      Alert.alert("Error", "Failed to update product status");
+    }
   }, []);
 
   const handleEdit = useCallback((product) => {
@@ -149,16 +135,16 @@ const renderItem = useCallback(({ item }) => {
           <Icon name="create-outline" size={16} color="#fff" />
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.deleteBtn}
-          onPress={() => handleDelete(item._id)}
+          style={[styles.statusBtn, item.isActive ? styles.activeBtn : styles.inactiveBtn]}
+          onPress={() => handleToggleStatus(item._id, item.isActive)}
           activeOpacity={0.7}
         >
-          <Icon name="trash-outline" size={16} color="#fff" />
+          <Text style={styles.statusText}>{item.isActive ? "Active" : "Inactive"}</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-}, [t, handleEdit, handleDelete]);
+}, [t, handleEdit, handleToggleStatus]);
 
 
   return (
@@ -329,10 +315,20 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 8,
   },
-  deleteBtn: {
-    backgroundColor: "#DC2626",
-    paddingHorizontal: 8,
+  statusBtn: {
+    paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 8,
+  },
+  activeBtn: {
+    backgroundColor: "#16A34A",
+  },
+  inactiveBtn: {
+    backgroundColor: "#9CA3AF",
+  },
+  statusText: {
+    color: "#fff",
+    fontSize: 11,
+    fontWeight: "600",
   },
 });
